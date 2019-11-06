@@ -1,0 +1,33 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<title>All Books</title>
+<div layout:fragment="content" id="content">
+    <div class="col-sm-10 " style="background-color:#F5F5F5;padding-bottom: 20px">
+        <div class="row" style="text-align: center; margin-bottom: 40px;margin-top: 40px;">
+            <h1 style="font-family: 'Rage Italic';color: black; border-top:dotted;border-bottom: dotted;padding: 10px 0px;font-size: 50px;
+                font-weight: 400;
+                letter-spacing: 5px;
+                text-transform: uppercase; " th:text="${category}"></h1>
+        </div>
+
+        <div  class="row" style="margin-bottom: 20px;">
+            <div th:each="book,idx : ${bookPage.content}" class="col-sm-3" style="margin-bottom: 20px;">
+                <a th:href="@{'/book/details/' + ${book.id}}">
+                    <img class="img-thumbnail" style="width:250px;height:350px; " th:src="@{'/book/' + ${book.id} + '/cover'}" alt="Image">
+                </a>
+            </div>
+        </div>
+        <div style="width: 100%; text-align: center">
+            <div th:if="${bookPage.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{'/books/'+${category}(size=${bookPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>

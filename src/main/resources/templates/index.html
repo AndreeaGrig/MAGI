@@ -1,0 +1,139 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{layout}">
+<title>All Books</title>
+<div layout:fragment="content" id="content">
+        <div class="col-sm-10 " style="background-color:#F5F5F5;padding-bottom: 20px">
+                <div class="row" style="margin-bottom: 20px;">
+
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators">
+                                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="7"></li>
+                                </ol>
+
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+
+                                        <div class="item active">
+                                                <a href="/books/Romance"><img src="/images/romance1.jpg" alt="Romance"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>ROMANCE</h1>
+                                                        <h3><i>"There is no charm equal to the tenderness of heart..."</i></h3>
+                                                        <p>Romance Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/Art"><img src="/images/art1.jpg" alt="Art"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>ART</h1>
+                                                        <h3><i>"Art enables us to find ourselves and lose ourselves at the same time..."</i></h3>
+                                                        <p>Art Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/Biographies"><img src="/images/biography1.jpg" alt="Biography"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>BIOGRAPHY</h1>
+                                                        <h3><i>"Always live your life with your biography in mind..."</i></h3>
+                                                        <p>Biography Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/Children"><img src="/images/children1.jpg" alt="Childhood"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>KIDS</h1>
+                                                        <h3><i>"Play is the work of childhood."</i></h3>
+                                                        <p>Childhood Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/Fantasy"><img src="/images/fantasy1.jpg" alt="Fantasy"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>FANTASY</h1>
+                                                        <h3><i>"I like nonsense, it wakes up the brain cells. Fantasy is a necessary ingredient in living."</i></h3>
+                                                        <p>Fantasy Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/History"><img src="/images/history1.jpg" alt="History"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>HISTORY</h1>
+                                                        <h3><i>"History never really says goodbye. History says, 'See you later!'."</i></h3>
+                                                        <p>History Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/Religion"><img src="/images/religion1.jpg" alt="Religion"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>RELIGION</h1>
+                                                        <h3><i>"Just as a candle cannot burn without fire, men cannot live without a spiritual life."</i></h3>
+                                                        <p>Religion Books</p>
+                                                </div>
+                                        </div>
+
+                                        <div class="item">
+                                                <a href="/books/Science"><img src="/images/science1.jpg" alt="Science"></a>
+                                                <div class="carousel-caption">
+                                                        <h1>SCIENCE</h1>
+                                                        <h3><i>"The science of today is the technology of tomorrow."</i></h3>
+                                                        <p>Science Books</p>
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                </a>
+                        </div>
+                </div>
+                <script>
+                        $('.carousel').carousel();
+                        $('.carousel').carousel({
+                                interval: 2000
+                        });
+                </script>
+
+                <div class="row" style="text-align: center; margin-bottom: 40px;">
+                                <h1 style="font-family: 'Rage Italic';color: black; border-top:dotted;border-bottom: dotted;padding: 10px 0px;font-size: 50px; font-weight: 400; letter-spacing: 5px;">THE LATEST</h1>
+                </div>
+                <div  class="row" style="margin-bottom: 20px;">
+                        <div th:each="book,idx : ${bookPage.content}" class="col-sm-3" style="margin-bottom: 20px;">
+                                <a th:href="@{'/book/details/' + ${book.id}}">
+                                        <img class="img-thumbnail" style="width:250px;height:350px; " th:src="@{'/book/' + ${book.id} + '/cover'}" alt="Image">
+                                </a>
+                        </div>
+                </div>
+                <div style="width: 100%; text-align: center">
+                <div th:if="${bookPage.totalPages > 0}" class="pagination"
+                     th:each="pageNumber : ${pageNumbers}">
+                        <a th:href="@{/books(size=${bookPage.size}, page=${pageNumber})}"
+                           th:text=${pageNumber}
+                           th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+                </div>
+                </div>
+
+        </div>
+
+</div>

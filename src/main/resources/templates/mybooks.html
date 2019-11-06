@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout}">
+<title th:text="My books"></title>
+<div layout:fragment="content" id="content">
+
+    <div class="col-sm-10 " style="background-color:#F5F5F5;padding-bottom: 20px; min-height: 360px;">
+        <style>
+            .fancyBB{
+                background-color: #070c0c;
+                border: none;
+                width: 50%;
+                padding: 10px;
+                color: white;
+                font-family: 'Abril Fatface';
+                font-size: 25px;
+            }
+            .fancyBB:hover{
+                color: black;
+                background-color: #feda86;
+            }
+        </style>
+        <hr/>
+        <h1 style="text-align: center;font-family: 'Dancing Script';font-size: 50px;">My library</h1>
+        <hr/>
+
+        <div th:each="fav : ${favourites}" class="row" style="margin: 10px;border: #070c0c solid 1px;padding-bottom: 10px;">
+            <div class="col-sm-4" style="text-align: center">
+                <h3 style="font-family: 'Caveat Brush';font-size: 40px;" th:text="${fav.bookFav.title}"></h3>
+                <img class="img-thumbnail" style="width:250px;height:350px" th:src="@{'/book/' + ${fav.bookFav.id} + '/cover'}" alt="NoPhotos">
+            </div>
+
+            <div class="col-sm-6" style="padding-top: 100px;font-family: 'Chenla';font-size: 15px;">
+                <ul>
+                    <li>
+                        <strong>Authors: </strong>
+                        <ul th:each="author : ${fav.bookFav.authors}">
+                            <li th:text="${author.firstLastName}"></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>Publishing House: </strong> <span th:text="${fav.bookFav.pubHouse.name}"></span>
+                    </li>
+                    <li>
+                        <strong>Category: </strong> <span th:text="${fav.bookFav.category}"></span>
+                    </li>
+                    <li>
+                        <strong>Description: </strong> <span th:text="${fav.bookFav.bookInfo.info}"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-2" style="padding-top: 50px; ">
+                <a  th:href="@{'/favbook/' + ${fav.id} + '/removefromybooks'}"><button class="fancyBB" type="submit" title="Remove from my list"><span class="glyphicon glyphicon-remove"></span></button></a>
+                <br/><br/>
+                <a  th:href="@{'/pdfs/'+ ${fav.bookFav.urlPdf}}"><button class="fancyBB" type="submit" title="Read"><span class="fa fa-book"></span></button></a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</html>

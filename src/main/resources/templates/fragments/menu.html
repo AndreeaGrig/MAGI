@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<div  xmlns:th="http://wwww.thymeleaf.org" th:fragment="menu">
+    <div class="header row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <img th:src="@{'/images/logof.png'}">
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+
+    <div id="navbar">
+      <a style="font-family: 'Amarante';" th:href="@{'/'}"><span class="glyphicon glyphicon-home"></span> Home</a>
+        <span sec:authorize="isAuthenticated()"> <a style="float: right;font-family: 'Amarante';"><span class="glyphicon glyphicon-on">Hello, </span> <span sec:authentication="name">Username</span> </a></span>
+        <span sec:authorize="isAuthenticated()"><a style="float: right;font-family: 'Amarante';" th:href="@{'/logout'}"><span class="glyphicon glyphicon-off"></span> Logout</a></span>
+        <span sec:authorize="hasRole('ROLE_ADMIN')"><a style="float: right;font-family: 'Amarante';" th:href="@{'/book/add'}"><span class="glyphicon glyphicon-book"></span> Add book</a></span>
+        <span sec:authorize="hasRole('ROLE_USER')"><a style="float: right;font-family: 'Amarante';" th:href="@{'/mybooks'}"><span class="glyphicon glyphicon-star"></span> My books</a></span>
+        <span sec:authorize="!isAuthenticated()">
+            <a style="float: right;font-family: 'Amarante';" th:href="@{'/login'}"><span class="glyphicon glyphicon-user"></span> Login</a>
+            <a style="float: right;font-family: 'Amarante';" th:href="@{'/registration'}"><span class="glyphicon glyphicon-user"></span> SignUp</a>
+        </span>
+
+    </div>
+</div>
+<script>
+window.onscroll = function() {myFunction()};
+
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+function myFunction() {
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky");
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+</script>
+</html>

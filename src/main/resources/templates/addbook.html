@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book Form - Step 1</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<div layout:fragment="content" id="content">
+    <style>
+        .panel-primary {
+            border-color: #2f4f4f;
+        }
+        .panel-primary>.panel-heading {
+            color: #fff;
+            background-color: #2f4f4f;
+            border-color: #2f4f4f;
+        }
+        .panel-primary>.panel-heading {
+            background-image: linear-gradient(to bottom,#2f4f4f 0, #2f4f4f 100%);
+        }
+
+        .fancyB{
+            background-color: darkslategrey;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            color: white;
+            font-family: 'Abril Fatface';
+            font-size: 20px;
+        }
+        .fancyB:hover{
+            color: black;
+            background-color:#98FB98;
+        }
+        .error-message{color: crimson}
+    </style>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form th:object="${book}" th:action="@{'/book/add'}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <input type="hidden" th:field="*{cover}"/>
+                <input type="hidden" th:field="*{urlPdf}"/>
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Step 1 - Add book details</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Title:</label>
+                                    <input type="text" class="form-control" th:field="*{title}"/>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('title')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Number of pages:</label>
+                                    <input type="text" class="form-control" th:field="*{numberOfPages}"/>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('numberOfPages')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Categories:</label>
+                                </div>
+                                <div class="col-md-9 form-group">
+                                    <li th:each="category : ${allCategories}">
+                                        <input type="radio" th:id="${{category}}" th:value="${{category}}" th:field="*{category}" />
+                                        <label th:for="${{category}}" th:text="${{category}}" ></label>
+                                    </li>
+                                        <p class="error-message"
+                                           th:each="error: ${#fields.errors('category')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Publication House:</label>
+                                </div>
+                                <div class="col-md-9 form-group">
+                                    <select th:field="*{pubHouse.id}">
+                                        <option th:each="pubHouse : ${allPubHouses}"
+                                                th:value="${pubHouse.id}"
+                                                th:text="${pubHouse.name}"></option>
+                                    </select>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('pubHouse')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Description</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <textarea class="form-control" rows="5" th:field="*{bookInfo.info}"></textarea>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('bookInfo')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Authors</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <th:block th:each="author : ${allAuthors}">
+                                    <input type="checkbox" name="selectedAuthors" th:value="${author.id}"/>
+                                    <label th:text="${author.firstLastName}"></label>
+                                </th:block>
+                                <p class="error-message"
+                                   th:each="error: ${#fields.errors('authors')}"
+                                   th:text="${error}">Validation error</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <button type="submit" style="margin-bottom: 20px;" class="fancyB">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</html>

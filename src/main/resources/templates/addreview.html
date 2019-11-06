@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{bookDetails}">
+<title></title>
+<div layout:fragment="content" id="content">
+<div class="col-sm-10 " >
+    <style>
+        .fancyBB{
+            background-color: #070c0c;
+            border: none;
+            width: 30%;
+            padding: 10px;
+            color: white;
+            font-family: 'Abril Fatface';
+            font-size: 25px;
+        }
+        .fancyBB:hover{
+            color: black;
+            background-color: #feda86;
+        }
+        label{
+            display: none;
+        }
+    </style>
+
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4" style="border: #070c0c solid 2px; padding: 20px;margin-top: 20px;background-color:#F5F5F5;; text-align: center;margin-bottom: 20px;">
+
+        <h1 style="text-align: center;font-family: 'Dancing Script';font-size: 50px;">New review</h1>
+
+        <form th:object="${review}" th:action="@{/review/}" method="post">
+            <input type="hidden" th:field="*{id}"/>
+            <input type="hidden" th:field="*{book.id}"/>
+            <input type="hidden" th:field="*{user.id}"/>
+            <div th:if="${#fields.hasErrors('text')}">
+                <div class="alert alert-danger">You can not post blank reviews!</div>
+            </div>
+            <textarea rows="10" th:field="*{text}" style="width: 300px;"/>
+
+
+            <button type="submit" class="fancyBB">Submit</button>
+        </form>
+    </div>
+    <div class="col-sm-4"></div>
+
+</div>
+</div>
+</html>
