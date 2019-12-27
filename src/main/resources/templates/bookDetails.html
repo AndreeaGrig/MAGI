@@ -41,7 +41,7 @@
             <h3 style="font-family: 'Caveat Brush';font-size: 40px;" th:text="${book.title}"></h3>
 
             <div class="thumbnail" style="background-color: #F5F5F5;padding-top: 20px;">
-                <img class="img-thumbnail" style="width:250px;height:350px" th:src="@{'/book/' + ${book.id} + '/cover'}" alt="Image">
+                <img class="img-thumbnail" style="width:250px;height:350px" th:src="@{'/images/covers/'+ ${book.cover}}" alt="Image">
                 <div class="caption">
                     <a th:href="@{'/pdfs/'+${ book.urlPdf}}" > <button class="fancyB"  type="submit">Read</button></a>
                 </div>

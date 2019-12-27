@@ -15,7 +15,11 @@ public class BookInfo {
     @OneToOne
     private Book book;
 
-    @Lob
+    private String language;
+
+    private Integer edition;
+
+    //@Lob
     @NotEmpty
     private String info;
 

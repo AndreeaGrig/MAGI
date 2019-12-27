@@ -28,10 +28,14 @@ public class Book {
 
     private Date addDate;
 
-    @Lob
-    private Byte[] cover;
+    //@Lob
+    //private Byte[] cover;
 
+    private String cover;
     private String urlPdf;
+
+    @NotNull(message = "Required field!")
+    private String isbn;
 
     @Min(value=5, message = "Min value 5!")
     @NotNull(message = "Required field!")

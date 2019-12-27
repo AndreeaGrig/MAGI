@@ -65,6 +65,15 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
+                                    <label>ISBN:</label>
+                                    <input type="text" class="form-control" th:field="*{isbn}"/>
+                                    <p class="error-message"
+                                       th:each="error: ${#fields.errors('isbn')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 form-group">
                                     <label>Number of pages:</label>
                                     <input type="text" class="form-control" th:field="*{numberOfPages}"/>
                                     <p class="error-message"

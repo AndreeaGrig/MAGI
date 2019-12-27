@@ -29,7 +29,7 @@
         <div th:each="fav : ${favourites}" class="row" style="margin: 10px;border: #070c0c solid 1px;padding-bottom: 10px;">
             <div class="col-sm-4" style="text-align: center">
                 <h3 style="font-family: 'Caveat Brush';font-size: 40px;" th:text="${fav.bookFav.title}"></h3>
-                <img class="img-thumbnail" style="width:250px;height:350px" th:src="@{'/book/' + ${fav.bookFav.id} + '/cover'}" alt="NoPhotos">
+                <img class="img-thumbnail" style="width:250px;height:350px" th:src="@{'/images/covers/'+ ${fav.bookFav.cover}}" alt="NoPhotos">
             </div>
 
             <div class="col-sm-6" style="padding-top: 100px;font-family: 'Chenla';font-size: 15px;">

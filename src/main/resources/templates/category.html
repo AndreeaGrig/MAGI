@@ -15,7 +15,7 @@
         <div  class="row" style="margin-bottom: 20px;">
             <div th:each="book,idx : ${bookPage.content}" class="col-sm-3" style="margin-bottom: 20px;">
                 <a th:href="@{'/book/details/' + ${book.id}}">
-                    <img class="img-thumbnail" style="width:250px;height:350px; " th:src="@{'/book/' + ${book.id} + '/cover'}" alt="Image">
+                    <img class="img-thumbnail" style="width:250px;height:350px; " th:src="@{'/images/covers/'+ ${book.cover}}" alt="Image">
                 </a>
             </div>
         </div>

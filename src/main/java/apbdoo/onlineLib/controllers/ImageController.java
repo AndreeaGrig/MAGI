@@ -42,7 +42,7 @@ public class ImageController {
 
 
 
-    @GetMapping("book/{id}/cover")
+    /*@GetMapping("book/{id}/cover")
     public void downloadCoverImage(@PathVariable String id, HttpServletResponse response) throws IOException {
         Book book = bookService.findBookById(Long.valueOf(id));
         if (book.getCover() != null) {
@@ -59,6 +59,6 @@ public class ImageController {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
 }
