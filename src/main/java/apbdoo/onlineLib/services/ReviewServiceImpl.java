@@ -1,6 +1,7 @@
 package apbdoo.onlineLib.services;
 
 import apbdoo.onlineLib.domain.Review;
+import apbdoo.onlineLib.repositories.ReviewInsertRepository;
 import apbdoo.onlineLib.repositories.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,20 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     ReviewRepository reviewRepository;
 
+    @Autowired
+    ReviewInsertRepository reviewInsertRepository;
+
     @Override
     public Review saveReview(Review review) {
         log.info("Saving "+review.getUser().getUsername()+"'s review for book "+review.getBook().getTitle());
-        Review savedReview = reviewRepository.save(review);
-        return savedReview;
+        reviewInsertRepository.insertWithQuery(review);
+        return reviewInsertRepository.selectWithQuery(review);
+    }
+
+    @Override
+    public void updateReview(Review review) {
+        log.info("Updating "+review.getUser().getUsername()+"'s review for book "+review.getBook().getTitle());
+        reviewInsertRepository.updateWithQuery(review);
     }
 
     @Override

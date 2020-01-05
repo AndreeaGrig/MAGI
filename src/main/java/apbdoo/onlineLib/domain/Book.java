@@ -46,21 +46,21 @@ public class Book {
     @NotNull(message = "Required field!")
     private PubHouse pubHouse;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "book_author",
             joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
     @NotNull(message = "Required field!")
     private Set<Author> authors = new HashSet<Author>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @NotNull(message = "Required field!")
     private BookInfo bookInfo;
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "book")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "book")
     private Set<Review> reviews = new HashSet<Review>();
 
-    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, mappedBy = "bookFav")
+    @OneToMany(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "bookFav")
     private Set<Favourites> favourites = new HashSet<Favourites>();
 
     public void setBookInfo(BookInfo bookInfo) {

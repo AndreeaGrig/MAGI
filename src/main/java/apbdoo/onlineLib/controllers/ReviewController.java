@@ -40,10 +40,11 @@ public class ReviewController {
         User user = userService.findByEmail(name);
         review.setUser(user);
         review.setAddDate(new Date());
-        reviewService.saveReview(review);
-        review.setText("  ");
+        review.setLastEditDate(new Date());
+        Review stored = reviewService.saveReview(review);
+        stored.setText("  ");
 
-        model.addAttribute("review", review);
+        model.addAttribute("review", stored);
 
         return "addreview";
     }
@@ -67,7 +68,7 @@ public class ReviewController {
         }
 
         review.setLastEditDate(new Date());
-        Review savedCommand = reviewService.saveReview(review);
+        reviewService.updateReview(review);
 
         return "redirect:/book/details/"+review.getBook().getId();
     }

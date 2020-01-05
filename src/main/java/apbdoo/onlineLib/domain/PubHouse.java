@@ -18,7 +18,7 @@ public class PubHouse {
 
     private String city;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pubHouse", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pubHouse", fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<Book>();
 
 

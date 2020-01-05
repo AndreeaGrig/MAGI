@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import apbdoo.onlineLib.domain.Role;
 import apbdoo.onlineLib.domain.User;
 import apbdoo.onlineLib.repositories.RoleRepository;
+import apbdoo.onlineLib.repositories.UserInsertRepository;
 import apbdoo.onlineLib.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UserInsertRepository userInsertRepository;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -64,7 +68,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Role role = roleRepository.findByName("ROLE_USER");
         user.setRoles(Arrays.asList(role));
-        userRepository.save(user);
+        userInsertRepository.insertWithQuery(user);
     }
 
     @Override

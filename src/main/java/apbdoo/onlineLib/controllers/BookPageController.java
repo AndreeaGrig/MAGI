@@ -31,7 +31,7 @@ public class BookPageController {
             @RequestParam("size") Optional<Integer> size){
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(4);
+        int pageSize = size.orElse(24);
 
         Page<Book> bookPage = bookService.getPage(PageRequest.of(currentPage-1, pageSize,  Sort.by("addDate").descending()));
         model.addAttribute("bookPage",bookPage);
@@ -53,7 +53,7 @@ public class BookPageController {
             @RequestParam("size") Optional<Integer> size){
 
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(4);
+        int pageSize = size.orElse(24);
 
         Page<Book> bookPage = bookService.getCategoryPage(category.toString(),PageRequest.of(currentPage-1, pageSize));
         model.addAttribute("bookPage",bookPage);

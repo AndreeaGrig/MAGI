@@ -52,7 +52,7 @@ public class User {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     private Set<Review> reviews = new HashSet<Review>();
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "userFav")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "userFav")
     private Set<Favourites> favourites = new HashSet<Favourites>();
 
 }

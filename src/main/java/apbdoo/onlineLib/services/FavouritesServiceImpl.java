@@ -1,6 +1,7 @@
 package apbdoo.onlineLib.services;
 
 import apbdoo.onlineLib.domain.Favourites;
+import apbdoo.onlineLib.repositories.FavouritesInsertRepository;
 import apbdoo.onlineLib.repositories.FavouritesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.constraints.EAN;
@@ -17,13 +18,18 @@ public class FavouritesServiceImpl implements FavouritesService {
     @Autowired
     FavouritesRepository favouritesRepository;
 
+    @Autowired
+    FavouritesInsertRepository favouritesInsertRepository;
+
     @Override
     public Favourites saveFavourites(Favourites favourite) {
         List<Favourites> favs = favouritesRepository.findByBookAndUser(favourite.getBookFav(), favourite.getUserFav());
         log.info("Saving book "+favourite.getBookFav().getTitle()+" in "+favourite.getUserFav().getUsername()+"'s list of favourites");
-        if(favs.size() == 0)
-            return favouritesRepository.save(favourite);
-        else return favs.get(0);
+        if(favs.size() == 0) {
+            favouritesInsertRepository.insertWithQuery(favourite);
+            favs = favouritesRepository.findByBookAndUser(favourite.getBookFav(), favourite.getUserFav());
+        }
+        return favs.get(0);
     }
 
     @Override

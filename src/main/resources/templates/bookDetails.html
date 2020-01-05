@@ -74,7 +74,7 @@
         <span sec:authorize="hasRole('ROLE_USER')">
         <div class="col-sm-4" style="margin-top: 20px;border: solid black 1px;padding-top: 20px;padding-bottom: 20px;padding-left: 25px;padding-right: 25px; ">
             <p style="font-family: 'Abril Fatface';font-size: 22px;color: #778899;">Most appreciated by users...</p>
-            <a th:each="rbook : ${rbooks}" style="padding: 5px;" th:href="@{'/book/details/'+ ${rbook.id}}"><img class="img-thumbnail" style="margin-bottom:10px;width:100px;height:150px" th:src="@{'/book/' + ${rbook.id} + '/cover'}" alt="Image"></a>
+            <a th:each="rbook : ${rbooks}" style="padding: 5px;" th:href="@{'/book/details/'+ ${rbook.id}}"><img class="img-thumbnail" style="margin-bottom:10px;width:100px;height:150px" th:src="@{'/images/covers/'+ ${rbook.cover}}" alt="Image"></a>
 
         </div></span>
     </div>

@@ -20,7 +20,7 @@ public class Author {
 
     private String nationality;
 
-    @ManyToMany(mappedBy = "authors",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "authors",fetch = FetchType.LAZY)
     private Set<Book> books = new HashSet<Book>();
 
     public void addBook(Book book){
